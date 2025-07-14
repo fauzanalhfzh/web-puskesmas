@@ -1,0 +1,131 @@
+<?php
+
+namespace App\Filament\Resources;
+
+use App\Filament\Resources\PendaftaranResource\Pages;
+use App\Filament\Resources\PendaftaranResource\RelationManagers;
+use App\Models\Pasien;
+use App\Models\Pendaftaran;
+use App\Models\Poli;
+use Filament\Forms;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Form;
+use Filament\Resources\Resource;
+use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+
+class PendaftaranResource extends Resource
+{
+    protected static ?string $model = Pendaftaran::class;
+
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    protected static ?string $navigationLabel = 'Pendaftaran';
+
+    protected static ?string $navigationGroup = 'Kelola Data';
+
+    protected static ?string $label = "Data Pendaftaran";
+
+    protected static ?string $slug = "kelola-data/pendaftaran";
+
+    public static function form(Form $form): Form
+    {
+        return $form
+            ->schema([
+                Select::make('pasien_id')
+                    ->label('Nama Pasien')
+                    ->columnSpan('full')
+                    ->required()
+                    ->options(Pasien::all()->pluck('nama_lengkap', 'id')),
+                Select::make('poli_id')
+                    ->label('Nama Poli')
+                    ->required()
+                    ->options(Poli::all()->pluck('nama_poli', 'id')),
+                Select::make('jalur')
+                    ->options([
+                        'Umum' => 'Umum',
+                        'BPJS' => 'BPJS',
+                    ])
+                    ->required(),
+                DatePicker::make('tanggal_kunjungan')
+                    ->required(),
+                Select::make('status')
+                    ->required()
+                    ->options([
+                        'Menunggu' => 'Menunggu',
+                        'Diterima' => 'Diterima',
+                        'Ditolak' => 'Ditolak',
+                    ]),
+            ]);
+    }
+
+    public static function table(Table $table): Table
+    {
+        return $table
+            ->columns([
+                TextColumn::make('pasien.nama_lengkap')
+                    ->numeric()
+                    ->sortable(),
+                TextColumn::make('poli_id')
+                    ->numeric()
+                    ->sortable(),
+                TextColumn::make('tanggal_kunjungan')
+                    ->date()
+                    ->sortable(),
+                TextColumn::make('jalur'),
+                TextColumn::make('status'),
+                TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+            ])
+            ->filters([
+                Tables\Filters\TrashedFilter::make(),
+            ])
+            ->actions([
+                Tables\Actions\ViewAction::make(),
+                Tables\Actions\EditAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\ForceDeleteBulkAction::make(),
+                    Tables\Actions\RestoreBulkAction::make(),
+                ]),
+            ]);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            //
+        ];
+    }
+
+    public static function getPages(): array
+    {
+        return [
+            'index' => Pages\ListPendaftarans::route('/'),
+            'create' => Pages\CreatePendaftaran::route('/create'),
+            'view' => Pages\ViewPendaftaran::route('/{record}'),
+            'edit' => Pages\EditPendaftaran::route('/{record}/edit'),
+        ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->withoutGlobalScopes([
+                SoftDeletingScope::class,
+            ]);
+    }
+}
