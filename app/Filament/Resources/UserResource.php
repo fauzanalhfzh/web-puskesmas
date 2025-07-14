@@ -27,7 +27,7 @@ class UserResource extends Resource
 
     protected static ?string $label = "Data Admin";
 
-    protected static ?string $slug = "pengaturan/admin";
+    protected static ?string $slug = "pengaturan/   admin";
 
     public static function form(Form $form): Form
     {
