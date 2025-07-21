@@ -17,7 +17,8 @@ return new class extends Migration
             $table->foreignId('poli_id')->constrained('poli')->onDelete('cascade');
             $table->date('tanggal_kunjungan');
             $table->string('jalur');
-            $table->string('status');
+            $table->enum('status', ['waiting', 'called', 'completed'])->default('waiting');
+            $table->string('nomor_antrian');
             $table->timestamps();
             $table->softDeletes();
         });

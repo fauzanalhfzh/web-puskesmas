@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Container\Attributes\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Pasien extends Model
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
+class Pasien extends Authenticatable
 {
     use SoftDeletes;
 
