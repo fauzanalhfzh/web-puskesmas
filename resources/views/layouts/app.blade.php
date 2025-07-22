@@ -26,6 +26,7 @@
                 <a href="{{ url('/') }}#layanan" class="text-gray-600 hover:text-blue-600">Layanan</a>
                 <a href="{{ url('/') }}#jadwal" class="text-gray-600 hover:text-blue-600">Jadwal Dokter</a>
                 <a href="{{ url('/') }}#kontak" class="text-gray-600 hover:text-blue-600">Kontak</a>
+                <a href="{{ url('/pendaftaran') }}" class="text-gray-600 hover:text-blue-600">Antrian Online</a>
             </div>
             <div class="flex items-center space-x-4">
                 @auth('pasien')
