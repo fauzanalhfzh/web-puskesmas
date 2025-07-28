@@ -1,12 +1,11 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\PendaftaranController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'index']);
 
 Route::get('/pendaftaran', [PendaftaranController::class, 'create'])
     ->middleware('auth:pasien')

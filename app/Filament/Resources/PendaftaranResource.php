@@ -68,6 +68,12 @@ class PendaftaranResource extends Resource
     {
         return $table
             ->columns([
+                TextColumn::make('nomor_antrian')
+                    ->label('Nomor Antrian')
+                    ->searchable()
+                    ->sortable()
+                    ->numeric()
+                    ->sortable(),
                 TextColumn::make('pasien.nama_lengkap')
                     ->label('Nama Pasien')
                     ->searchable()
