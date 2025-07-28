@@ -17,6 +17,8 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use App\Filament\Resources\PendaftaranResource\Widgets\PendaftaranStatsOverview;
+use App\Filament\Resources\PasienResource\Widgets\JumlahPasienChart;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -28,6 +30,7 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->registration()
+            ->brandName('Puskesmas - Admin')
             ->colors([
                 'primary' => Color::Lime,
             ])
@@ -38,7 +41,8 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
-                Widgets\AccountWidget::class,
+                pendaftaranStatsOverview::class,
+                JumlahPasienChart::class,
             ])
             ->middleware([
                 EncryptCookies::class,

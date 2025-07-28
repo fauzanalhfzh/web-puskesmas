@@ -69,16 +69,28 @@ class PendaftaranResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('pasien.nama_lengkap')
+                    ->label('Nama Pasien')
+                    ->searchable()
+                    ->sortable()
                     ->numeric()
                     ->sortable(),
-                TextColumn::make('poli_id')
-                    ->numeric()
+                TextColumn::make('poli.nama_poli')
+                    ->label('Nama Poli')
+                    ->searchable()
                     ->sortable(),
                 TextColumn::make('tanggal_kunjungan')
+                    ->label('Tanggal Kunjungan')
+                    ->searchable()
                     ->date()
                     ->sortable(),
-                TextColumn::make('jalur'),
-                TextColumn::make('status'),
+                TextColumn::make('jalur')
+                    ->label('Jalur')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('status')
+                    ->label('Status')
+                    ->searchable()
+                    ->sortable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

@@ -20,8 +20,8 @@ class Pendaftaran extends Model
         return $this->belongsTo(Pasien::class);
     }
 
-    public function poli(): HasOne
+    public function poli(): BelongsTo
     {
-        return $this->hasOne(Poli::class);
+        return $this->belongsTo(Poli::class);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\PendaftaranResource\Pages;
 
 use App\Filament\Resources\PendaftaranResource;
+use App\Filament\Resources\PendaftaranResource\Widgets\PendaftaranStatsOverview;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
@@ -14,6 +15,13 @@ class ListPendaftarans extends ListRecords
     {
         return [
             Actions\CreateAction::make(),
+        ];
+    }
+
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            PendaftaranStatsOverview::class,
         ];
     }
 }
