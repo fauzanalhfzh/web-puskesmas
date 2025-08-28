@@ -30,17 +30,17 @@
             </div>
             <div class="flex items-center space-x-4">
                 @auth('pasien')
-                    <span class="text-gray-700">Halo, {{ Auth::guard('pasien')->user()->nama_lengkap }}</span>
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit"
-                            class="bg-red-600 text-white px-4 py-2 rounded-full hover:bg-red-700">Logout</button>
-                    </form>
+                <span class="text-gray-700">Halo, {{ Auth::guard('pasien')->user()->nama_lengkap }}</span>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit"
+                        class="bg-red-600 text-white px-4 py-2 rounded-full hover:bg-red-700">Logout</button>
+                </form>
                 @else
-                    <a href="{{ route('login') }}"
-                        class="bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700">Login</a>
+                <a href="{{ route('login') }}"
+                    class="bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700">Login</a>
                 @endauth
-                </div>
+            </div>
         </nav>
     </header>
 
@@ -56,6 +56,17 @@
         </div>
     </footer>
 
+
+    <script>
+        // Mendapatkan elemen input tanggal
+        const tanggalInput = document.getElementById('tanggal_kunjungan');
+
+        // Mendapatkan tanggal hari ini dalam format yyyy-mm-dd
+        const today = new Date().toISOString().split('T')[0];
+
+        // Menetapkan tanggal minimal menjadi hari ini
+        tanggalInput.setAttribute('min', today);
+    </script>
 </body>
 
 </html>

@@ -16,8 +16,10 @@ class PendaftaranController extends Controller
     {
         $pasien = Auth::guard('pasien')->user();
         $polis = Poli::all();
-        return view('pendaftaran.create', compact('pasien', 'polis'));
+        $pendaftaran = Pendaftaran::all();
+        return view('pendaftaran.create', compact('pasien', 'polis', 'pendaftaran'));
     }
+
     public function store(Request $request)
     {
         // Validasi data
