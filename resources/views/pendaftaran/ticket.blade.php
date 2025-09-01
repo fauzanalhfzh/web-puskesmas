@@ -48,6 +48,7 @@
             <p>NIK: {{ $pasien->nik }}</p>
             <p>Jenis Kelamin: {{ $pasien->Jenis_Kelamin }}</p>
             <p>Tanggal Lahir: {{ $pasien->tanggal_lahir }}</p>
+            <p>Umur: {{ $umur }} Tahun</p>
             <p>Alamat: {{ $pasien->alamat }}</p>
             <p>Telepon: {{ $pasien->no_telepon }}</p>
             <p>Poli: {{ $poli->nama_poli }}</p>
