@@ -15,14 +15,14 @@ class PendaftaranStatsOverview extends BaseWidget
         $poliStats = Poli::withCount('pendaftaran')->get();
 
         // Ambil jumlah pasien PBJS dan Umum
-        $pbjsCount = Pendaftaran::where('jalur', 'PBJS')->count();
+        $pbjsCount = Pendaftaran::where('jalur', 'BPJS')->count();
         $umumCount = Pendaftaran::where('jalur', 'Umum')->count();
 
 
         $stats = [];
 
         // Menambahkan statistik untuk pasien PBJS dan Umum
-        $stats[] = Stat::make("Pasien PBJS", number_format($pbjsCount));
+        $stats[] = Stat::make("Pasien BPJS", number_format($pbjsCount));
         $stats[] = Stat::make("Pasien Umum", number_format($umumCount));
 
 
