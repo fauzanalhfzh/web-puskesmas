@@ -30,6 +30,19 @@ class PendaftaranController extends Controller
             'jalur' => 'required',
         ]);
 
+        // Cek jika jalur BPJS, pastikan hanya sekali per hari
+        if ($request->jalur === 'bpjs') {
+            $cekBPJS = Pendaftaran::where('pasien_id', $request->pasien_id)
+                ->whereDate('tanggal_kunjungan', $request->tanggal_kunjungan)
+                ->where('jalur', 'bpjs')
+                ->exists();
+
+            if ($cekBPJS) {
+                return redirect()->back()
+                    ->with('error', 'Pendaftaran BPJS hanya bisa dilakukan satu kali dalam sehari.');
+            }
+        }
+
         $poli = Poli::findOrFail($request->poli_id);
         $nomor_antrian = null;
         $pendaftaran = null;
