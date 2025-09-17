@@ -5,6 +5,7 @@ namespace App\Filament\Resources\PasienResource\Pages;
 use App\Filament\Resources\PasienResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
+use App\Filament\Resources\PasienResource\Widgets\JumlahPasienChart;
 
 class ListPasiens extends ListRecords
 {
@@ -14,6 +15,13 @@ class ListPasiens extends ListRecords
     {
         return [
             Actions\CreateAction::make(),
+        ];
+    }
+
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            JumlahPasienChart::class,
         ];
     }
 }
